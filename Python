@@ -1,0 +1,22 @@
+def count_ways(coins, amount):
+    # Inisialisasi array untuk menyimpan jumlah cara mencapai setiap nilai
+    dp = [0] * (amount + 1)
+    dp[0] = 1  # Hanya ada 1 cara untuk membuat nilai 0 (yaitu, tidak menggunakan koin apa pun)
+
+    # Untuk setiap koin, perbarui cara untuk mencapai nilai dari koin ke amount
+    for coin in coins:
+        for i in range(coin, amount + 1):
+            dp[i] += dp[i - coin]
+
+    return dp[amount]
+
+# Daftar koin yang tersedia
+coins = [2, 3, 5, 10, 15]
+
+# Nilai yang ingin dicapai
+amount = int(input("Masukkan nilai yang ingin dicapai: "))
+
+# Menghitung jumlah kombinasi koin
+result = count_ways(coins, amount)
+
+print(f"Jumlah cara untuk mencapai nilai {amount} dengan koin {coins} adalah {result}")
